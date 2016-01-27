@@ -24,10 +24,30 @@
 
         <log4j.version>2.5</log4j.version>
         <slf4j.version>1.7.13</slf4j.version>
+        <spring.version>4.2.4.RELEASE</spring.version>
+        <commons-io.version>2.4</commons-io.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!--spring-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
             <!--dom4j-->
             <dependency>
                 <groupId>dom4j</groupId>
@@ -79,6 +99,13 @@
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>
                 <version>${log4j.version}</version>
+            </dependency>
+
+            <!--commons-->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
             </dependency>
 
             <!--测试-->
