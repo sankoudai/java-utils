@@ -2,6 +2,7 @@ package com.xulf.util.common;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -91,5 +92,35 @@ public class URIUtil {
         }
 
         return params;
+    }
+
+    /**
+     * @param url
+     * @param key
+     * @param value
+     * @return
+     */
+    public static String appendParam(String url, String key, String value) {
+        if (url == null || key == null || value == null) {
+            return url;
+        }
+
+        String newUrl = url;
+        try {
+            String pair = key + "=" + URLEncoder.encode(value, "utf8");
+            if (!url.contains("?")) {
+                newUrl = newUrl + "?" + pair;
+            } else {
+                if (url.endsWith("&") || url.endsWith("?")) {
+                    newUrl = newUrl + pair;
+                } else {
+                    newUrl = newUrl + "&" + pair;
+                }
+            }
+        } catch (UnsupportedEncodingException e) {
+            System.out.println("HttpUtil[appendParam]出错: UnsupportedEncodingException！");
+        }
+
+        return newUrl;
     }
 }
